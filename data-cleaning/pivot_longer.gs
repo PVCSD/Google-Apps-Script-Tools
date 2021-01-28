@@ -1,4 +1,6 @@
 
+
+
 /** 
  * Transform data from wide to long
  * 
@@ -47,7 +49,20 @@ function PIVOT_LONGER(
       tmp = data[0][j];
     else
       data[0][j] = tmp;
-
+	
+  // for 2 fixed rows calculate unique column number
+  if (nRows == 2)
+  {
+    uniqueCols = 0;
+    tmp = {};
+    for (j=nCols;j<data[1].length;j++)
+      if (typeof tmp[ data[1][j] ] == 'undefined')
+      {
+        tmp[ data[1][j] ] = 1;
+        uniqueCols++;
+      }
+  }
+  
 
 // return first row: fix column titles + pivoted values column title + values column title(s)
   row = [];
@@ -76,3 +91,6 @@ function PIVOT_LONGER(
 
 
 }
+
+
+
